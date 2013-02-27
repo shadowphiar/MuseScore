@@ -96,6 +96,10 @@ enum P_ID {
       P_SPACE,          // used for spacer
       P_TEMPO,
       P_TEMPO_FOLLOW_TEXT,
+      P_CAPO_POSITION,
+      P_CAPO_DISPLAY_INLINE,
+      P_CAPO_BRACKETS,
+      P_CAPO_SIMPLIFY,
       P_ACCIDENTAL_BRACKET,
       P_NUMERATOR_STRING,
       P_DENOMINATOR_STRING,

@@ -81,6 +81,7 @@
 #include "image.h"
 #include "marker.h"
 #include "jump.h"
+#include "capotext.h"
 
 // extern bool showInvisible;
 
@@ -174,7 +175,8 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "FBox"),
       QT_TRANSLATE_NOOP("elementName", "AccidentalBracket"),
       QT_TRANSLATE_NOOP("elementName", "Icon"),
-      QT_TRANSLATE_NOOP("elementName", "Ossia")
+      QT_TRANSLATE_NOOP("elementName", "Ossia"),
+      QT_TRANSLATE_NOOP("elementName", "CapoText")
       };
 
 //---------------------------------------------------------
@@ -1290,6 +1292,7 @@ Element* Element::create(ElementType type, Score* score)
             case MEASURE:           return new Measure(score);
             case TAB_DURATION_SYMBOL: return new TabDurationSymbol(score);
             case OSSIA:               return new Ossia(score);
+            case CAPO_TEXT:         return new CapoText(score);
             case IMAGE:             return new Image(score);
 
             case TEXTLINE_SEGMENT:    // return new TextLineSegment(score);
@@ -1557,7 +1560,8 @@ bool Element::isText() const
          || type() == REHEARSAL_MARK
          || type() == INSTRUMENT_CHANGE
          || type() == FIGURED_BASS
-         || type() == TEMPO_TEXT;
+         || type() == TEMPO_TEXT
+         || type() == CAPO_TEXT;
       }
 
 //---------------------------------------------------------

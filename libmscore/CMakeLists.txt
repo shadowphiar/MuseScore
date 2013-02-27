@@ -14,7 +14,7 @@
 if (SCRIPT_INTERFACE)
    QT4_WRAP_CPP (libqtMocs
       accidental.h arpeggio.h articulation.h barline.h beam.h bend.h
-      box.h bracket.h breath.h bsymbol.h chord.h chordline.h chordrest.h
+      box.h bracket.h breath.h bsymbol.h capotext.h chord.h chordline.h chordrest.h
       clef.h duration.h dynamic.h element.h figuredbass.h fingering.h fret.h
       glissando.h hairpin.h harmony.h hook.h icon.h image.h instrchange.h
       keysig.h lasso.h layoutbreak.h line.h lyrics.h measurebase.h measure.h
@@ -48,7 +48,7 @@ add_library (
       ${INCS}
       segmentlist.cpp fingering.cpp accidental.cpp arpeggio.cpp
       articulation.cpp barline.cpp beam.cpp bend.cpp box.cpp
-      bracket.cpp breath.cpp bsp.cpp chord.cpp chordline.cpp
+      bracket.cpp breath.cpp bsp.cpp capotext.cpp chord.cpp chordline.cpp
       chordlist.cpp chordrest.cpp clef.cpp cleflist.cpp
       drumset.cpp durationtype.cpp dynamic.cpp edit.cpp
       element.cpp elementlayout.cpp event.cpp excerpt.cpp

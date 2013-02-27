@@ -241,6 +241,7 @@ class Element : public QObject {
             ACCIDENTAL_BRACKET,
             ICON,
             OSSIA,
+            CAPO_TEXT,
 
             MAXTYPE
             };
