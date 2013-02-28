@@ -2218,6 +2218,7 @@ void Measure::read(XmlReader& e, int staffIdx)
                || tag == "Jump"
                || tag == "StaffState"
                || tag == "FiguredBass"
+               || tag == "CapoText"
                ) {
                   Element* el = Element::name2Element(tag, score());
                   el->setTrack(e.track());

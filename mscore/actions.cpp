@@ -1372,6 +1372,13 @@ Shortcut Shortcut::sc[] = {
          QT_TRANSLATE_NOOP("action","Tempo Marking..."),
          QT_TRANSLATE_NOOP("action","Tempo Marking")
          ),
+         Shortcut(
+            STATE_NORMAL | STATE_NOTE_ENTRY,
+            A_CMD,
+            "capo",
+            QT_TRANSLATE_NOOP("action","Capo Position..."),
+            QT_TRANSLATE_NOOP("action","Capo Position")
+            ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          0,

@@ -336,6 +336,18 @@ void initStyle(MStyle* s)
          TextStyle::HIDE_IN_EDITOR));                                   // don't show in Style Editor
 
       AS(TextStyle(
+		 TR( "Capo Chordname"), ff,  12, false, false, false,
+		 ALIGN_LEFT | ALIGN_BASELINE, QPointF(), OS, QPointF(), true,
+		 Spatium(0.0), Spatium(0.0), 25, QColor(Qt::black), false,      // default params
+		 false, QColor(Qt::black), QColor(255, 255, 255, 0),            // default params
+		 TextStyle::HIDE_IN_EDITOR));                                   // don't show in Style Editor
+
+      AS(TextStyle(
+         TR( "Capo Position"), ff, 12, false, false, false,
+         ALIGN_LEFT | ALIGN_BASELINE, QPointF(0, -4.0), OS, QPointF(),
+         true, MMSP(.0), MMSP(.0), 0, Qt::black, false, true));
+
+      AS(TextStyle(
          TR( "Rehearsal Mark"), ff,  14, true, false, false,
          ALIGN_HCENTER | ALIGN_BASELINE, QPointF(0, -3.0), OS, QPointF(), true,
          Spatium(0.2), Spatium(.5), 20, Qt::black, false, true));

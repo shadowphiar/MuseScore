@@ -445,6 +445,7 @@ void Segment::add(Element* el)
             case TEXT:
             case TAB_DURATION_SYMBOL:
             case FIGURED_BASS:
+            case CAPO_TEXT:
                   _annotations.append(el);
                   break;
             case JUMP:

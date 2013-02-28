@@ -103,6 +103,12 @@ static const PropertyData propertyList[] = {
       { P_SPACE,               false, "space",         T_REAL   },
       { P_TEMPO,               false, "tempo",         T_TEMPO  },
       { P_TEMPO_FOLLOW_TEXT,   false, "followText",    T_BOOL   },
+
+      { P_CAPO_POSITION,	   false, "position",	   T_INT	},
+      { P_CAPO_DISPLAY_INLINE, false, "displayInline", T_BOOL	},
+      { P_CAPO_BRACKETS,	   false, "brackets",	   T_BOOL	},
+      { P_CAPO_SIMPLIFY,	   false, "simplify",	   T_BOOL	},
+
       { P_ACCIDENTAL_BRACKET,  false, "bracket",       T_BOOL   },
       { P_NUMERATOR_STRING,    false, "textN",         T_STRING },
       { P_DENOMINATOR_STRING,  false, "textD",         T_STRING },

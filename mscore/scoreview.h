@@ -52,7 +52,8 @@ enum {
       TEXT_POET,
       TEXT_SYSTEM,
       TEXT_STAFF,
-      TEXT_REHEARSAL_MARK
+      TEXT_REHEARSAL_MARK,
+      TEXT_CAPO_POSITION
       };
 
 //---------------------------------------------------------

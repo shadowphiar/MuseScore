@@ -52,6 +52,7 @@
 #include "libmscore/tremolo.h"
 #include "libmscore/repeat.h"
 #include "libmscore/tempotext.h"
+#include "libmscore/capotext.h"
 #include "libmscore/glissando.h"
 #include "libmscore/articulation.h"
 #include "libmscore/chord.h"
@@ -880,6 +881,12 @@ Palette* MuseScore::newTextPalette()
       Harmony* harmony = new Harmony(gscore);
       harmony->setText("c7");
       sp->append(harmony, tr("Chord Name"));
+
+      CapoText *capo = new CapoText(gscore);
+      capo->setText("Capo 2");
+      capo->setPosition(2);
+      sp->append(capo, tr("Capo Position"));
+
       return sp;
       }
 
@@ -1057,6 +1064,7 @@ QMenu* MuseScore::genCreateMenu(QWidget* parent)
       text->addAction(getAction("lyrics"));
       text->addAction(getAction("figured-bass"));
       text->addAction(getAction("tempo"));
+      text->addAction(getAction("capo"));
 
       popup->addSeparator();
       popup->addAction(getAction("add-slur"));

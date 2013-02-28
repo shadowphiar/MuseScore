@@ -67,6 +67,7 @@
 #include "scoretab.h"
 #include "measureproperties.h"
 #include "libmscore/pitchspelling.h"
+#include "libmscore/capotext.h"
 
 #include "libmscore/articulation.h"
 #include "libmscore/tuplet.h"
@@ -2506,6 +2507,9 @@ void ScoreView::cmd(const QAction* a)
             cmdAddText(TEXT_STAFF);
       else if (cmd == "rehearsalmark-text")
             cmdAddText(TEXT_REHEARSAL_MARK);
+      else if (cmd == "capo")
+    	  cmdAddText(TEXT_CAPO_POSITION);
+
 
       else if (cmd == "edit-element") {
             Element* e = _score->selection().element();
@@ -4712,6 +4716,17 @@ void ScoreView::cmdAddText(int type)
                   s->setParent(cr->segment());
                   }
                   break;
+            case TEXT_CAPO_POSITION:
+            	  {
+                  ChordRest* cr = _score->getSelectedChordRest();
+      		      if (!cr)
+                        break;
+                  s = new CapoText(_score);
+                  s->setTrack(cr->track());
+                  s->setTextStyleType(TEXT_STYLE_CAPO_POSITION);
+                  s->setParent(cr->segment());
+            	  }
+            	  break;
             }
 
       if (s) {

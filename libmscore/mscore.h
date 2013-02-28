@@ -309,6 +309,8 @@ enum {
 
       TEXT_STYLE_STAFF,
       TEXT_STYLE_HARMONY,
+      TEXT_STYLE_CAPO_HARMONY,
+      TEXT_STYLE_CAPO_POSITION,
       TEXT_STYLE_REHEARSAL_MARK,
       TEXT_STYLE_REPEAT_LEFT,       // align to start of measure
       TEXT_STYLE_REPEAT_RIGHT,      // align to end of measure

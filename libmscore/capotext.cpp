@@ -29,7 +29,7 @@ CapoText::CapoText(Score* s)
       _brackets = true;
       _simplify = true;
       setPlacement(ABOVE);
-      setTextStyle(s->textStyle(TEXT_STYLE_TEMPO));
+      setTextStyle(s->textStyle(TEXT_STYLE_CAPO_POSITION));
       }
 
 //---------------------------------------------------------
@@ -45,7 +45,7 @@ void CapoText::write(Xml& xml) const
       if (_brackets)
             xml.tag("brackets", _brackets);
       if (_simplify)
-            xml.tag("brackets", _simplify);
+            xml.tag("simplify", _simplify);
       Text::writeProperties(xml);
       xml.etag();
       }
@@ -70,6 +70,17 @@ void CapoText::read(XmlReader& e)
                   e.unknown();
             }
       }
+
+//---------------------------------------------------------
+//   textChanged
+//    text may have changed
+//---------------------------------------------------------
+
+void CapoText::textChanged()
+      {
+      return;
+      }
+
 
 //---------------------------------------------------------
 //   undoSetPosition
