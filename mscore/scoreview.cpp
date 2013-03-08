@@ -68,6 +68,7 @@
 #include "measureproperties.h"
 #include "libmscore/pitchspelling.h"
 #include "libmscore/capotext.h"
+#include "capoproperties.h"
 
 #include "libmscore/articulation.h"
 #include "libmscore/tuplet.h"
@@ -4719,12 +4720,20 @@ void ScoreView::cmdAddText(int type)
             case TEXT_CAPO_POSITION:
             	  {
                   ChordRest* cr = _score->getSelectedChordRest();
-      		      if (!cr)
+                  if (!cr)
                         break;
-                  s = new CapoText(_score);
-                  s->setTrack(cr->track());
-                  s->setTextStyleType(TEXT_STYLE_CAPO_POSITION);
-                  s->setParent(cr->segment());
+                  CapoProperties capoproperties(0);
+                  int rv = capoproperties.exec();
+                  if (rv == 1) {
+                        CapoText* ct = new CapoText(_score);
+                        ct->setPosition(capoproperties.getPosition());
+                        ct->setText(capoproperties.getText());
+
+                        s = ct;
+                        s->setTrack(cr->track());
+                        s->setTextStyleType(TEXT_STYLE_CAPO_POSITION);
+                        s->setParent(cr->segment());
+                        }
             	  }
             	  break;
             }

@@ -44,7 +44,7 @@ QT4_WRAP_UI (ui_headers
       slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui
       voltaproperties.ui timesigproperties.ui boxproperties.ui
       instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui aboutmusicxmlbox.ui
-      chordedit.ui transposedialog.ui
+      chordedit.ui transposedialog.ui capoproperties.ui
       lineproperties.ui excerptsdialog.ui lyrics.ui stafftext.ui tupletdialog.ui
       glissandoprop.ui articulation.ui metaedit.ui palette.ui
       hairpin.ui textline.ui slurproperties.ui debugger.ui
@@ -83,7 +83,7 @@ QT4_WRAP_CPP (mocs
       articulationprop.h metaedit.h magbox.h voiceselector.h
       textprop.h textproperties.h tupletdialog.h
       slurproperties.h selectdialog.h synthcontrol.h drumroll.h pianoroll.h
-      piano.h ruler.h file.h
+      piano.h ruler.h file.h capoproperties.h
       pianoview.h drumview.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
       harmonycanvas.h updatechecker.h fretproperties.h fretcanvas.h editstafftype.h
       prefsdialog.h sectionbreakprop.h bendproperties.h
@@ -177,7 +177,7 @@ add_executable ( ${ExecutableName}
       timesigproperties.cpp newwizard.cpp transposedialog.cpp
       chordedit.cpp excerptsdialog.cpp metaedit.cpp magbox.cpp
       voiceselector.cpp capella.cpp exportaudio.cpp palettebox.cpp
-      textproperties.cpp slurproperties.cpp
+      textproperties.cpp slurproperties.cpp capoproperties.cpp
       synthcontrol.cpp drumroll.cpp pianoroll.cpp piano.cpp
       pianoview.cpp drumview.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp
       updatechecker.cpp importove.cpp ove.cpp ruler.cpp
