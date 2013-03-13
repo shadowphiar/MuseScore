@@ -825,6 +825,7 @@ Element* ChordRest::drop(const DropData& data)
                   // fall through
             case TEXT:
             case STAFF_TEXT:
+            case CAPO_TEXT:
             case STAFF_STATE:
             case INSTRUMENT_CHANGE:
             case REHEARSAL_MARK:

@@ -882,10 +882,15 @@ Palette* MuseScore::newTextPalette()
       harmony->setText("c7");
       sp->append(harmony, tr("Chord Name"));
 
-      CapoText *capo = new CapoText(gscore);
-      capo->setText("Capo 2");
-      capo->setPosition(2);
-      sp->append(capo, tr("Capo Position"));
+      CapoText *capo2 = new CapoText(gscore);
+      capo2->setText("Capo 2");
+      capo2->setPosition(2);
+      sp->append(capo2, tr("Capo Position"));
+
+      CapoText *capo3 = new CapoText(gscore);
+      capo3->setText("Capo 3");
+      capo3->setPosition(3);
+      sp->append(capo3, tr("Capo Position"));
 
       return sp;
       }
