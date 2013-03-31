@@ -59,6 +59,7 @@ struct TextSegment {
 
 struct RenderAction;
 class HDegree;
+class CapoTextProperties;
 
 class Harmony : public Text {
       Q_OBJECT
@@ -132,6 +133,8 @@ class Harmony : public Text {
       virtual QLineF dragAnchor() const;
       void setHarmony(const QString& s);
       virtual QPainterPath shape() const;
+
+      CapoTextProperties capo() const;
       };
 
 #endif

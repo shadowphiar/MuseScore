@@ -4729,6 +4729,8 @@ void ScoreView::cmdAddText(int type)
                         ct->setPosition(capoproperties.getPosition());
                         ct->setText(capoproperties.getText());
 
+                        cr->staff()->setCapo(cr->segment()->tick(), ct->capoTextProperties());
+
                         s = ct;
                         s->setTrack(cr->track());
                         s->setTextStyleType(TEXT_STYLE_CAPO_POSITION);

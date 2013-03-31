@@ -77,6 +77,7 @@
 #include "accidental.h"
 #include "layout.h"
 #include "icon.h"
+#include "capotext.h"
 
 //---------------------------------------------------------
 //   MStaff
@@ -2194,6 +2195,15 @@ void Measure::read(XmlReader& e, int staffIdx)
                         segment->add(t);
                         }
                   }
+            else if (tag == "CapoText") {
+                  CapoText* c = new CapoText(score());
+                  c->setTrack(e.track());
+                  c->read(e);
+                  int tick = e.tick();
+                  segment = getSegment(Segment::SegChordRest, tick);
+                  segment->add(c);
+                  staff->setCapo(tick, c->capoTextProperties());
+                  }
 
             //----------------------------------------------------
             // Annotation
@@ -2218,7 +2228,6 @@ void Measure::read(XmlReader& e, int staffIdx)
                || tag == "Jump"
                || tag == "StaffState"
                || tag == "FiguredBass"
-               || tag == "CapoText"
                ) {
                   Element* el = Element::name2Element(tag, score());
                   el->setTrack(e.track());

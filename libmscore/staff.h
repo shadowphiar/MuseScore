@@ -41,6 +41,8 @@ struct ClefTypeList;
 class Segment;
 class Clef;
 class TimeSig;
+class CapoTextProperties;
+class CapoMap;
 
 //---------------------------------------------------------
 //   LinkedStaves
@@ -94,6 +96,7 @@ class Staff : public QObject {
       QList<TimeSig*> timesigs;
 
       KeyList* _keymap;
+      CapoMap* _capomap;
       QList <BracketItem> _brackets;
       int _barLineSpan;       ///< 0 - no bar line, 1 - span this staff, ...
       int _barLineFrom;       ///< line of start staff to draw the barline from (0 = staff top line, ...)
@@ -158,6 +161,11 @@ class Staff : public QObject {
       void setKey(int tick, int st);
       void setKey(int tick, const KeySigEvent& st);
       void removeKey(int tick);
+
+      CapoMap* capomap() const       { return _capomap;     }
+      CapoTextProperties capo(int tick) const;
+      void setCapo(int tick, const CapoTextProperties& c);
+      void removeCapo(int tick);
 
       bool show() const;
       bool slashStyle() const;

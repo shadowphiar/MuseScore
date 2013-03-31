@@ -16,10 +16,32 @@
 
 #include "text.h"
 
+
+//-------------------------------------------------------------------
+//   @@ CapoTextProperties
+///   data-only struct for the capo properties which affect harmony rendering
+//-------------------------------------------------------------------
+
+class CapoTextProperties {
+protected:
+      unsigned  _position;              // fret position in semitones
+      bool _displayInline;          // display the capo chord name inline with harmony
+      bool _brackets;                   // display brackets around the capo chord name
+      bool _simplify;                   // display simplified version of capo chord name
+
+public:
+      unsigned position() const  { return _position;   }
+      bool displayInline() const    { return _displayInline; }
+      bool brackets() const    { return _brackets; }
+      bool simplify() const    { return _simplify; }
+
+      CapoTextProperties();
+      };
+
 //-------------------------------------------------------------------
 //   @@ CapoText
-///   Capo marker which determines the capo display for
-///   Chord Name (harmony) elements
+///   Capo marker representing object on page to determine capo display
+///   for Chord Name (harmony) elements
 //
 //    @P position unsigned 	capo position (in semitones, or 0 for no display)
 //    @P displayInline bool show capo chordname inline with harmony
@@ -27,17 +49,14 @@
 //    @P simplify bool		show a simplified chord, e.g. Asus2(G)
 //-------------------------------------------------------------------
 
-class CapoText : public Text  {
+class CapoText : public Text, public CapoTextProperties  {
       Q_OBJECT
       Q_PROPERTY(unsigned position      READ position   	WRITE undoSetPosition)
       Q_PROPERTY(bool     displayInline READ displayInline  WRITE undoSetDisplayInline)
       Q_PROPERTY(bool     brackets      READ brackets 		WRITE undoSetBrackets)
       Q_PROPERTY(bool     simplify      READ simplify 		WRITE undoSetSimplify)
 
-      unsigned	_position;		// fret position in semitones
-      bool _displayInline; 	    // display the capo chord name inline with harmony
-      bool _brackets;			// display brackets around the capo chord name
-      bool _simplify;			// display simplified version of capo chord name
+
    public:
       CapoText(Score*);
       virtual CapoText* clone() const { return new CapoText(*this); }
@@ -47,19 +66,15 @@ class CapoText : public Text  {
       Segment* segment() const   { return (Segment*)parent(); }
       Measure* measure() const   { return (Measure*)parent()->parent(); }
 
-      unsigned position() const  { return _position;   }
       void setPosition(unsigned v)  { _position = v;         }
       void undoSetPosition(unsigned v);
 
-      bool displayInline() const    { return _displayInline; }
       void setDisplayInline(bool v) { _displayInline = v;    }
       void undoSetDisplayInline(bool v);
 
-      bool brackets() const    { return _brackets; }
       void setBrackets(bool v) { _brackets = v;    }
       void undoSetBrackets(bool v);
 
-      bool simplify() const    { return _simplify; }
       void setSimplify(bool v) { _simplify = v;    }
       void undoSetSimplify(bool v);
 
@@ -69,6 +84,21 @@ class CapoText : public Text  {
       QVariant getProperty(P_ID propertyId) const;
       bool setProperty(P_ID propertyId, const QVariant&);
       QVariant propertyDefault(P_ID id) const;
+
+      CapoTextProperties capoTextProperties() const { return *(static_cast<const CapoTextProperties*>(this)); }
       };
+
+
+//---------------------------------------------------------
+//   CapoMap
+//    this map is instantiated for every staff
+//    to keep track of capo changes
+//---------------------------------------------------------
+class CapoMap : public std::map<const int, CapoTextProperties> {
+   public:
+      CapoMap() {}
+      CapoTextProperties capo(int tick) const;
+      };
+
 
 #endif

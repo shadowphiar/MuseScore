@@ -20,6 +20,10 @@
 #include "chordlist.h"
 #include "mscore.h"
 #include "fret.h"
+#include "utils.h"
+#include "capotext.h"
+#include "staff.h"
+#include <assert.h>
 
 //---------------------------------------------------------
 //   harmonyName
@@ -759,6 +763,38 @@ void Harmony::render(const TextStyle* st)
             }
       if (_baseTpc != INVALID_TPC)
             render(chordList->renderListBase, x, y, _baseTpc);
+
+      CapoTextProperties cp = capo();
+      if (cp.position() != 0) { // capo exists
+            Interval capointerval( 0 - cp.position());
+            int capoTpc = transposeTpc(_rootTpc, capointerval, false); // no double-sharps or flats
+
+            y=0.0;
+
+            int fontIdx = 0;
+            TextSegment* ts = new TextSegment(fontList[fontIdx], x, y);
+            QString s ="(";
+            ts->setText(s);
+            textList.append(ts);
+            x += ts->width();
+
+            render(chordList->renderListRoot, x, y, capoTpc);
+            ChordDescription* cd = chordList->value(_id);
+            if (cd) {
+                  render(cd->renderList, x, y, 0);
+                  }
+            if (_baseTpc != INVALID_TPC) {
+                  int capoBaseTpc = transposeTpc(_baseTpc, capointerval, false); // no double-sharps or flats
+                  render(chordList->renderListBase, x, y, capoBaseTpc);
+                  }
+
+            ts = new TextSegment(fontList[fontIdx], x, y);
+            s =")";
+            ts->setText(s);
+            textList.append(ts);
+            x += ts->width();
+
+            }
       }
 
 //---------------------------------------------------------
@@ -860,4 +896,18 @@ const QList<HDegree>& Harmony::degreeList() const
       {
       return _degreeList;
       }
+
+//---------------------------------------------------------
+//   capo
+//---------------------------------------------------------
+CapoTextProperties Harmony::capo() const
+      {
+            Segment* sg = dynamic_cast<Segment *>(parent());
+            Staff* st = staff();
+            if ( (sg == 0) || (st == 0))
+                  return CapoTextProperties();
+
+            return st->capo(sg->tick());
+      }
+
 

@@ -29,6 +29,7 @@
 #include "timesig.h"
 #include "instrtemplate.h"
 #include "barline.h"
+#include "capotext.h"
 
 //---------------------------------------------------------
 //   idx
@@ -161,6 +162,7 @@ Staff::Staff(Score* s)
       _rstaff         = 0;
       _part           = 0;
       _keymap         = new KeyList;
+      _capomap        = new CapoMap;
       (*_keymap)[0]   = KeySigEvent(0);                  // default to C major
       _staffType      = _score->staffType(PITCHED_STAFF_TYPE);
       _small          = false;
@@ -180,6 +182,7 @@ Staff::Staff(Score* s, Part* p, int rs)
       _rstaff         = rs;
       _part           = p;
       _keymap         = new KeyList;
+      _capomap        = new CapoMap;
       (*_keymap)[0]   = KeySigEvent(0);                  // default to C major
       _staffType      = _score->staffType(PITCHED_STAFF_TYPE);
       _small          = false;
@@ -205,6 +208,7 @@ Staff::~Staff()
                   delete _linkedStaves;
             }
       delete _keymap;
+      delete _capomap;
       }
 
 //---------------------------------------------------------
@@ -535,6 +539,33 @@ void Staff::setKey(int tick, const KeySigEvent& st)
 void Staff::removeKey(int tick)
       {
       _keymap->erase(tick);
+      }
+
+//---------------------------------------------------------
+//   Staff::capo
+//---------------------------------------------------------
+
+CapoTextProperties Staff::capo(int tick) const
+      {
+      return _capomap->capo(tick);
+      }
+
+//---------------------------------------------------------
+//   setCapo
+//---------------------------------------------------------
+
+void Staff::setCapo(int tick, const CapoTextProperties& c)
+      {
+      (*_capomap)[tick] = c;
+      }
+
+//---------------------------------------------------------
+//   removeCapo
+//---------------------------------------------------------
+
+void Staff::removeCapo(int tick)
+      {
+      _capomap->erase(tick);
       }
 
 //---------------------------------------------------------

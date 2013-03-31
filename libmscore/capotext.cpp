@@ -18,16 +18,23 @@
 #include "measure.h"
 
 //---------------------------------------------------------
+//   CapoTextProperties
+//---------------------------------------------------------
+CapoTextProperties::CapoTextProperties()
+      {
+      _position = 0;
+      _displayInline = true;
+      _brackets = true;
+      _simplify = true;
+      }
+
+//---------------------------------------------------------
 //   CapoText
 //---------------------------------------------------------
 
 CapoText::CapoText(Score* s)
    : Text(s)
       {
-      _position = 0;
-      _displayInline = true;
-      _brackets = true;
-      _simplify = true;
       setPlacement(ABOVE);
       setTextStyle(s->textStyle(TEXT_STYLE_CAPO_POSITION));
       }
@@ -192,4 +199,17 @@ void CapoText::layout()
             }
       }
 
+//---------------------------------------------------------
+//   CapoMap::capo
+//---------------------------------------------------------
+CapoTextProperties CapoMap::capo(int tick) const
+      {
+      if (empty())
+            return CapoTextProperties();
+      auto i = upper_bound(tick);
+      if (i == begin())
+            return CapoTextProperties();
+      --i;
+      return i->second;
+      }
 
