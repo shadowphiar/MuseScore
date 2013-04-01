@@ -36,6 +36,7 @@
 #include "clef.h"
 #include "timesig.h"
 #include "system.h"
+#include "capotext.h"
 
 //---------------------------------------------------------
 //   subTypeName
@@ -445,8 +446,11 @@ void Segment::add(Element* el)
             case TEXT:
             case TAB_DURATION_SYMBOL:
             case FIGURED_BASS:
+                  _annotations.append(el);
+                  break;
             case CAPO_TEXT:
                   _annotations.append(el);
+                  el->staff()->setCapo(tick(), static_cast<CapoText*>(el)->capoTextProperties());
                   break;
             case JUMP:
                   measure()->setRepeatFlags(measure()->repeatFlags() | RepeatJump);
@@ -576,6 +580,11 @@ void Segment::remove(Element* el)
             case TEXT:
             case TAB_DURATION_SYMBOL:
             case FIGURED_BASS:
+                  _annotations.removeOne(el);
+                  break;
+
+            case CAPO_TEXT:
+                  el->staff()->removeCapo(tick());
                   _annotations.removeOne(el);
                   break;
 

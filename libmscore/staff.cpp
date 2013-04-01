@@ -30,6 +30,7 @@
 #include "instrtemplate.h"
 #include "barline.h"
 #include "capotext.h"
+#include "harmony.h"
 
 //---------------------------------------------------------
 //   idx
@@ -557,6 +558,7 @@ CapoTextProperties Staff::capo(int tick) const
 void Staff::setCapo(int tick, const CapoTextProperties& c)
       {
       (*_capomap)[tick] = c;
+      changedCapo();
       }
 
 //---------------------------------------------------------
@@ -566,6 +568,23 @@ void Staff::setCapo(int tick, const CapoTextProperties& c)
 void Staff::removeCapo(int tick)
       {
       _capomap->erase(tick);
+      changedCapo();
+      }
+
+//---------------------------------------------------------
+//   changedCapo
+//---------------------------------------------------------
+static void renderHarmonyElement(void*, Element* e)
+      {
+      if (e->type() == Element::HARMONY)
+            static_cast<Harmony*>(e)->render();
+      }
+
+void Staff::changedCapo()
+      {
+      Score* sc = score();
+      sc->scanElements(0, renderHarmonyElement);
+      sc->setLayoutAll(true);
       }
 
 //---------------------------------------------------------

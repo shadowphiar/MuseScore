@@ -166,6 +166,7 @@ class Staff : public QObject {
       CapoTextProperties capo(int tick) const;
       void setCapo(int tick, const CapoTextProperties& c);
       void removeCapo(int tick);
+      void changedCapo();
 
       bool show() const;
       bool slashStyle() const;
